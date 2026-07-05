@@ -37,12 +37,16 @@ app.get('/api/vtpass/balance', async (req, res) => {
 
     res.json(response.data);
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.response?.data || error.message
+  console.log("VTpass Error:", error.response?.data || error.message);
+
+  res.status(500).json({
+    success: false,
+    message: error.response?.data || error.message
+  });
+}
     });
-  }
-});
+  
+
 
 const PORT = process.env.PORT || 3000;
 
