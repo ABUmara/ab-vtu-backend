@@ -23,6 +23,28 @@ app.post('/api/test', (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 
+// VTPass Balance Check
+app.get('/api/vtpass/balance', async (req, res) => {
+  try {
+    const response = await axios.get(
+      'https://api-service.vtpass.com/api/balance',
+      {
+        headers: {
+          'api-key': process.env.VTPASS_API_KEY,
+          'secret-key': process.env.VTPASS_SECRET_KEY
+        }
+      }
+    );
+
+    res.json(response.data);
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.response?.data || error.message
+    });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
