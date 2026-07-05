@@ -8,6 +8,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Home Route
 app.get('/', (req, res) => {
   res.send('AB VTU Backend is running!');
 });
@@ -21,9 +22,7 @@ app.post('/api/test', (req, res) => {
   });
 });
 
-const PORT = process.env.PORT || 3000;
-
-// VTPass Balance Check
+// VTpass Balance Check
 app.get('/api/vtpass/balance', async (req, res) => {
   try {
     const response = await axios.get(
@@ -44,6 +43,8 @@ app.get('/api/vtpass/balance', async (req, res) => {
     });
   }
 });
+
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
