@@ -30,7 +30,7 @@ app.get('/api/vtpass/balance', async (req, res) => {
       {
         headers: {
           'api-key': process.env.VTPASS_API_KEY,
-          'secret-key': process.env.VTPASS_SECRET_KEY
+          'public-key': process.env.VTPASS_PUBLIC_KEY
         }
       }
     );
