@@ -23,28 +23,22 @@ app.post('/api/test', (req, res) => {
 });
 
 // VTpass Balance Check
-app.get('/api/vtpass/balance', async (req, res) => {
+App.get('/api/clubkonnect/balance', async (req, res) => {
   try {
     const response = await axios.get(
-      'https://api-service.vtpass.com/api/balance',
-      {
-        headers: {
-          'api-key': process.env.VTPASS_API_KEY,
-          'secret-key': process.env.VTPASS_SECRET_KEY
-        }
-      }
+      `https://www.nellobytesystems.com/APIWalletBalanceV1.asp?UserID=${process.env.CLUBKONNECT_USER_ID}&APIKey=${process.env.CLUBKONNECT_API_KEY}`
     );
 
     res.json(response.data);
   } catch (error) {
-  console.log("VTpass Error:", error.response?.data || error.message);
+    console.log(error.response?.data || error.message);
 
-  res.status(500).json({
-    success: false,
-    message: error.response?.data || error.message
-  });
-}
+    res.status(500).json({
+      success: false,
+      message: error.response?.data || error.message
     });
+  }
+});
   
 
 
