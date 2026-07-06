@@ -23,7 +23,7 @@ app.post('/api/test', (req, res) => {
 });
 
 // VTpass Balance Check
-App.get('/api/clubkonnect/balance', async (req, res) => {
+app.get('/api/clubkonnect/balance', async (req, res) => {
   try {
     const response = await axios.get(
       `https://www.nellobytesystems.com/APIWalletBalanceV1.asp?UserID=${process.env.CLUBKONNECT_USER_ID}&APIKey=${process.env.CLUBKONNECT_API_KEY}`
