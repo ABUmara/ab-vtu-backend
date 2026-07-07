@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 });
 
 // Test Route
-app.post('/api/test', (req, res) => {
+app.get('/api/test', (req, res) => {
   res.json({
     success: true,
     message: 'Backend is working!',
@@ -52,9 +52,8 @@ app.get('/api/buy-data', async (req, res) => {
     } = req.query;
 
 
-    console.log("Query received:", req.query);
-    console.log("MobileNumber:", MobileNumber);
-
+    console.log("REQUEST QUERY:", req.query);
+    
     const url =
       `https://www.nellobytesystems.com/APIDatabundleV1.asp?UserID=${process.env.CLUBKONNECT_USER_ID}` +
       `&APIKey=${process.env.CLUBKONNECT_API_KEY}` +
