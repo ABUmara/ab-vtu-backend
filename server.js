@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-require('dotenv').config();
 const axios = require('axios');
+require('dotenv').config();
 
 const app = express();
 
@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
   res.send('AB VTU Backend is running!');
 });
 
-// Test API Route
+// Test Route
 app.post('/api/test', (req, res) => {
   res.json({
     success: true,
@@ -22,7 +22,7 @@ app.post('/api/test', (req, res) => {
   });
 });
 
-// VTpass Balance Check
+// Wallet Balance
 app.get('/api/clubkonnect/balance', async (req, res) => {
   try {
     const response = await axios.get(
@@ -30,17 +30,49 @@ app.get('/api/clubkonnect/balance', async (req, res) => {
     );
 
     res.json(response.data);
-  } catch (error) {
-    console.log(error.response?.data || error.message);
 
+  } catch (error) {
     res.status(500).json({
       success: false,
       message: error.response?.data || error.message
     });
   }
 });
-  
 
+// Buy Data
+app.get('/api/buy-data', async (req, res) => {
+  try {
+
+    const {
+      MobileNetwork,
+      DataPlan,
+      MobileNumber,
+      RequestID,
+      CallBackURL
+    } = req.query;
+
+    const url =
+      `https://www.nellobytesystems.com/APIDatabundleV1.asp?UserID=${process.env.CLUBKONNECT_USER_ID}` +
+      `&APIKey=${process.env.CLUBKONNECT_API_KEY}` +
+      `&MobileNetwork=${MobileNetwork}` +
+      `&DataPlan=${DataPlan}` +
+      `&MobileNumber=${MobileNumber}` +
+      `&RequestID=${RequestID}` +
+      `&CallBackURL=${CallBackURL}`;
+
+    const response = await axios.get(url);
+
+    res.json(response.data);
+
+  } catch (error) {
+
+    res.status(500).json({
+      success: false,
+      message: error.response?.data || error.message
+    });
+
+  }
+});
 
 const PORT = process.env.PORT || 3000;
 
