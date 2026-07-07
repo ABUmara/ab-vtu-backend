@@ -26,7 +26,7 @@ app.post('/api/test', (req, res) => {
 app.get('/api/clubkonnect/balance', async (req, res) => {
   try {
     const response = await axios.get(
-      `https://www.nellobytesystems.com/APIWalletBalanceV1.asp?UserID=${process.env.CLUBKONNECT_USER_ID}&APIKey=${process.env.CLUBKONNECT_API_KEY}`
+      `https://www.nellobytesystems.com/APIWalletBala nceV1.asp?UserID=${process.env.CLUBKONNECT_USER_ID}&APIKey=${process.env.CLUBKONNECT_API_KEY}`
     );
 
     res.json(response.data);
@@ -50,6 +50,10 @@ app.get('/api/buy-data', async (req, res) => {
       RequestID,
       CallBackURL
     } = req.query;
+
+
+    console.log("Query received:", req.query);
+    console.log("MobileNumber:", MobileNumber);
 
     const url =
       `https://www.nellobytesystems.com/APIDatabundleV1.asp?UserID=${process.env.CLUBKONNECT_USER_ID}` +
